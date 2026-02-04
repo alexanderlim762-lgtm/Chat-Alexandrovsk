@@ -1,0 +1,5 @@
+body {font-family: Montserrat, sans-serif; background:#020617; color:white; margin:0; padding:20px;}
+header {display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
+a {color:#3b82f6; text-decoration:none;}
+input,textarea,button {margin-top:10px; padding:8px; border-radius:6px; border:none;}
+button {background:#3b82f6; color:white; cursor:pointer;}
