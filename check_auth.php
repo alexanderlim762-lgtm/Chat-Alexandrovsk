@@ -1,19 +1,10 @@
 <?php
 session_start();
 
-/*
-  1. Если сессия уже есть — пользователь авторизован
-*/
-if (isset($_SESSION['user_id'])) {
-    return;
-}
+if (isset($_SESSION['user_id'])) return;
 
-/*
-  2. Если есть cookie с основного сайта — проверяем её
-*/
 if (isset($_COOKIE['auth_token'])) {
     $token = $_COOKIE['auth_token'];
-
     $api = "https://alexandrovsk.c6t.ru/api/check_token.php?token=" . urlencode($token);
     $response = @file_get_contents($api);
     $data = json_decode($response, true);
@@ -25,14 +16,7 @@ if (isset($_COOKIE['auth_token'])) {
     }
 }
 
-/*
-  3. Если не авторизован — СРАЗУ на другой сайт
-*/
-$redirect = urlencode(
-    "https://forum-alexandrovsk.c6t.ru" . $_SERVER['REQUEST_URI']
-);
-
-header(
-    "Location: https://alexandrovsk.c6t.ru/login.html?redirect=$redirect"
-);
+// Редирект на логин
+$redirect = urlencode("https://forum-alexandrovsk.c6t.ru".$_SERVER['REQUEST_URI']);
+header("Location: https://alexandrovsk.c6t.ru/login.html?redirect=$redirect");
 exit;
